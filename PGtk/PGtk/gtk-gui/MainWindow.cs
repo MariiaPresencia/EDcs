@@ -5,7 +5,7 @@ public partial class MainWindow
 {
 	private global::Gtk.UIManager UIManager;
 	
-	private global::Gtk.VBox vbox1;
+	private global::Gtk.VBox vBox;
 	
 	private global::Gtk.Label LabelSaludo;
 	
@@ -29,19 +29,19 @@ public partial class MainWindow
 		this.Title = global::Mono.Unix.Catalog.GetString ("MainWindow");
 		this.WindowPosition = ((global::Gtk.WindowPosition)(4));
 		// Container child MainWindow.Gtk.Container+ContainerChild
-		this.vbox1 = new global::Gtk.VBox ();
-		this.vbox1.Name = "vbox1";
-		this.vbox1.Spacing = 6;
-		// Container child vbox1.Gtk.Box+BoxChild
+		this.vBox = new global::Gtk.VBox ();
+		this.vBox.Name = "vBox";
+		this.vBox.Spacing = 6;
+		// Container child vBox.Gtk.Box+BoxChild
 		this.LabelSaludo = new global::Gtk.Label ();
 		this.LabelSaludo.Name = "LabelSaludo";
 		this.LabelSaludo.LabelProp = global::Mono.Unix.Catalog.GetString ("Hola Mundo");
-		this.vbox1.Add (this.LabelSaludo);
-		global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.LabelSaludo]));
+		this.vBox.Add (this.LabelSaludo);
+		global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.vBox [this.LabelSaludo]));
 		w2.Position = 0;
 		w2.Expand = false;
 		w2.Fill = false;
-		// Container child vbox1.Gtk.Box+BoxChild
+		// Container child vBox.Gtk.Box+BoxChild
 		this.hbox1 = new global::Gtk.HBox ();
 		this.hbox1.Name = "hbox1";
 		this.hbox1.Spacing = 6;
@@ -75,12 +75,12 @@ public partial class MainWindow
 		w5.Position = 2;
 		w5.Expand = false;
 		w5.Fill = false;
-		this.vbox1.Add (this.hbox1);
-		global::Gtk.Box.BoxChild w6 = ((global::Gtk.Box.BoxChild)(this.vbox1 [this.hbox1]));
+		this.vBox.Add (this.hbox1);
+		global::Gtk.Box.BoxChild w6 = ((global::Gtk.Box.BoxChild)(this.vBox [this.hbox1]));
 		w6.Position = 1;
 		w6.Expand = false;
 		w6.Fill = false;
-		this.Add (this.vbox1);
+		this.Add (this.vBox);
 		if ((this.Child != null)) {
 			this.Child.ShowAll ();
 		}
