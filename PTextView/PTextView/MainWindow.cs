@@ -4,6 +4,8 @@ using Gtk;
 
 public partial class MainWindow: Gtk.Window
 {
+	private string filename;
+
 	public MainWindow () : base (Gtk.WindowType.Toplevel)
 	{
 		Build ();
@@ -30,7 +32,28 @@ public partial class MainWindow: Gtk.Window
 		if ((ResponseType)fileChooserDialog.Run () == ResponseType.Ok) //Es lo mismo que lo de arriba
 			//Console.WriteLine ("Filename=" + fileChooserDialog.Filename);
 			textView.Buffer.Text = File.ReadAllText (fileChooserDialog.Filename);
+
 		fileChooserDialog.Destroy ();
 	}
 
+	protected void OnSaveActionActivated (object sender, EventArgs e)
+	{
+		if (filename == null)
+			saveAs ();
+		else
+			File.WriteAllText (filename, textView.Buffer.Text);
+	}
+	private void saveAs(){
+		FileChooserDialog fileChooserDialog = new FileChooserDialog (
+			"Guardar como...",
+			this,
+			FileChooserAction.Save,
+			Stock.Cancel, ResponseType.Cancel,
+			Stock.Save, ResponseType.Ok);
+		if ((ResponseType)fileChooserDialog.Run () == ResponseType.Ok) {
+			filename = fileChooserDialog.Filename;
+			File.WriteAllText (filename, textView.Buffer.Text);
+		}
+		fileChooserDialog.Destroy ();
+	}
 }
