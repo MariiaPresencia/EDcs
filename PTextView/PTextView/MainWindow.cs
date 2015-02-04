@@ -56,4 +56,9 @@ public partial class MainWindow: Gtk.Window
 		}
 		fileChooserDialog.Destroy ();
 	}
+	protected void OnSaveAsActionActivated (object sender, EventArgs e)
+	{
+		saveAs ();
+	}
+		
 }
