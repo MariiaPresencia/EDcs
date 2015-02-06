@@ -5,12 +5,13 @@ using Gtk;
 public partial class MainWindow: Gtk.Window
 {
 	private string filename;
+	//private string content;
 
 	public MainWindow () : base (Gtk.WindowType.Toplevel)
 	{
 		Build ();
 
-
+		Console.WriteLine ("textView.Buffer.Text.Equals(\"\") {0}", textView.Buffer.Text.Equals(""));
 		//textView.Buffer.Text = File.ReadAllText("prueba.txt");
 	}
 
@@ -60,5 +61,11 @@ public partial class MainWindow: Gtk.Window
 	{
 		saveAs ();
 	}
+
 		
+	protected void OnNewActionActivated (object sender, EventArgs e)
+	{
+
+	}
+
 }
