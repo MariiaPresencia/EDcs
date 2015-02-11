@@ -5,13 +5,12 @@ using Gtk;
 public partial class MainWindow: Gtk.Window
 {
 	private string filename;
-	//private string content;
+	private string content = "";
 
 	public MainWindow () : base (Gtk.WindowType.Toplevel)
 	{
 		Build ();
 
-		Console.WriteLine ("textView.Buffer.Text.Equals(\"\") {0}", textView.Buffer.Text.Equals(""));
 		//textView.Buffer.Text = File.ReadAllText("prueba.txt");
 	}
 
@@ -21,8 +20,33 @@ public partial class MainWindow: Gtk.Window
 		a.RetVal = true;
 	}
 
+	/// <summary>
+	/// Confirm() devuelve true si el usuario confirma que descarta los cambios
+	/// </summary>
+	private bool confirm(){
+
+		MessageDialog messageDialog = new MessageDialog (
+			this,
+			DialogFlags.DestroyWithParent,
+			MessageType.Question,
+			ButtonsType.YesNo,
+			"Hay cambios sin guardar.¿Quieres descartar los cambios?");
+		ResponseType responseType = (ResponseType)messageDialog.Run ();
+		messageDialog.Destroy ();
+//		if (responseType != ResponseType.Yes)//quiere cancelar 
+			return responseType == ResponseType.Yes; // true o false
+
+	}
+
+	private bool hasChanges(){
+		return !content.Equals (textView.Buffer.Text);
+	}
+
 	protected void OnOpenActionActivated (object sender, EventArgs e)
 	{
+		if (hasChanges() && !confirm ())
+				return;
+
 		FileChooserDialog fileChooserDialog = new FileChooserDialog (
 			                                      "Elige el archivo",
 			                                      this,
@@ -30,9 +54,12 @@ public partial class MainWindow: Gtk.Window
 			                                      Stock.Cancel, ResponseType.Close,
 			                                      Stock.Open, ResponseType.Ok);
 		//if (fileChooserDialog.Run () == (int)ResponseType.Ok)
-		if ((ResponseType)fileChooserDialog.Run () == ResponseType.Ok) //Es lo mismo que lo de arriba
+		if ((ResponseType)fileChooserDialog.Run () == ResponseType.Ok) {//Es lo mismo que lo de arriba
 			//Console.WriteLine ("Filename=" + fileChooserDialog.Filename);
 			textView.Buffer.Text = File.ReadAllText (fileChooserDialog.Filename);
+			content = File.ReadAllText (filename);
+			textView.Buffer.Text = File.ReadAllText (filename);
+		}
 
 		fileChooserDialog.Destroy ();
 	}
@@ -65,7 +92,13 @@ public partial class MainWindow: Gtk.Window
 		
 	protected void OnNewActionActivated (object sender, EventArgs e)
 	{
+		if (hasChanges() && !confirm ()) 
+				return;
 
+		
+		textView.Buffer.Text = "";
+		content = "";
+		filename = null;
 	}
 
 }
