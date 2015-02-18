@@ -3,7 +3,7 @@
   <MonoDevelop.Ide.Workbench ActiveDocument="PTextView/MainWindow.cs">
     <Files>
       <File FileName="PTextView/Program.cs" Line="1" Column="1" />
-      <File FileName="PTextView/MainWindow.cs" Line="1" Column="1" />
+      <File FileName="PTextView/MainWindow.cs" Line="4" Column="4" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
