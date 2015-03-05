@@ -28,12 +28,20 @@ public partial class MainWindow: Gtk.Window
 			uint fila = index / 10;
 			uint columna = index % 10;
 			Button button = new Button ();
-			button.Label = (index + 1).ToString();
+			EventBox eventBox = new EventBox ();
+			Label label =new Label ((index + 1).ToString());
+			label.Visible = true;
+			eventBox.Add (label);
+			eventBox.Visible = true;
+			button.BorderWidth = 0;
+			button.Add (eventBox);
+
+
 			button.Visible = true;
 			table.Attach (button, columna , columna + 1 , fila , fila + 1);
 
 			button.Clicked += delegate {
-				button.ModifyBg(StateType.Normal, new Gdk.Color(0,255,0));
+				eventBox.ModifyBg(StateType.Normal, new Gdk.Color(0,255,0));
 			};
 		}
 
